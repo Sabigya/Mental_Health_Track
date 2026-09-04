@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindTrack AI — Understand Your Mental Wellness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="#home" class="logo">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="26" height="26">
+          <circle cx="16" cy="16" r="6" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.55"/>
+          <circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+        </svg>
+      </span>
+      MindTrack&nbsp;AI
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#assessment">Assessment</a>
+      <a href="#how-it-works">How It Works</a>
+    </nav>
+
+    <div class="navbar-actions">
+      <button class="btn btn-primary btn-sm" id="navStartBtn">Start Assessment</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow-free-label">For students, by design</p>
+        <h1>Understand your<br>mental wellness.</h1>
+        <p class="hero-sub">
+          Get an AI-powered wellness score based on your daily habits, study patterns,
+          sleep, physical activity, social-media usage, and stress.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="heroStartBtn">Start Assessment</button>
+          <a href="#how-it-works" class="btn btn-ghost">How it works</a>
+        </div>
+        <p class="hero-note">Takes about two minutes · Three short steps</p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="breathing-rings">
+          <div class="ring ring-1"></div>
+          <div class="ring ring-2"></div>
+          <div class="ring ring-3"></div>
+          <div class="ring-core">
+            <span class="core-number">78</span>
+            <span class="core-label">sample score</span>
+          </div>
+        </div>
+        <div class="float-chip chip-sleep">🌙 Sleep 7h</div>
+        <div class="float-chip chip-focus">📘 Study 5h</div>
+        <div class="float-chip chip-move">🏃 Activity 1h</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURES ================= -->
+  <section class="features" id="how-it-works">
+    <div class="section-inner">
+      <h2>How it works</h2>
+      <p class="section-sub">A short assessment, an honest score, a few ideas worth trying.</p>
+
+      <div class="feature-grid">
+        <article class="feature-card feature-card--a">
+          <span class="feature-icon">🧠</span>
+          <h3>AI powered</h3>
+          <p>A machine-learning model trained on student lifestyle data predicts your wellness score.</p>
+        </article>
+        <article class="feature-card feature-card--b">
+          <span class="feature-icon">📊</span>
+          <h3>Lifestyle insights</h3>
+          <p>See how sleep, screen time, study, and activity may relate to how you're doing.</p>
+        </article>
+        <article class="feature-card feature-card--c">
+          <span class="feature-icon">⚡</span>
+          <h3>Simple &amp; fast</h3>
+          <p>Answer twelve questions across three steps and get your result instantly.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ASSESSMENT ================= -->
+  <section class="assessment" id="assessment">
+    <div class="section-inner section-inner--narrow">
+
+      <div class="assessment-head">
+        <h2>Your assessment</h2>
+        <p class="section-sub">Answer honestly — there are no right or wrong answers here.</p>
+      </div>
+
+      <div class="assessment-card">
+
+        <!-- Progress -->
+        <div class="progress-track" id="progressTrack">
+          <div class="progress-step" data-step="1">
+            <span class="progress-dot">1</span>
+            <span class="progress-label">Personal</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step" data-step="2">
+            <span class="progress-dot">2</span>
+            <span class="progress-label">Digital habits</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step" data-step="3">
+            <span class="progress-dot">3</span>
+            <span class="progress-label">Lifestyle</span>
+          </div>
+        </div>
+
+        <form id="wellnessForm" novalidate>
+
+          <!-- ---- STEP 1 ---- -->
+          <fieldset class="form-step is-active" data-step="1">
+            <legend>Personal information</legend>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="Age" min="10" max="100" placeholder="e.g. 21" required>
+                <span class="field-hint">Between 10 and 100</span>
+                <span class="field-error" id="err-age"></span>
+              </div>
+
+              <div class="field">
+                <label for="gender">Gender</label>
+                <select id="gender" name="Gender" required>
+                  <option value="" disabled selected>Select</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+                <span class="field-error" id="err-gender"></span>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="country">Country</label>
+                <select id="country" name="Country" required>
+                  <option value="" disabled selected>Select your country</option>
+                </select>
+                <span class="field-error" id="err-country"></span>
+              </div>
+
+              <div class="field">
+                <label for="academicLevel">Academic level</label>
+                <select id="academicLevel" name="Academic_Level" required>
+                  <option value="" disabled selected>Select</option>
+                  <option value="Undergraduate">Undergraduate</option>
+                  <option value="Graduate">Graduate</option>
+                  <option value="High School">High School</option>
+                </select>
+                <span class="field-error" id="err-academicLevel"></span>
+              </div>
+            </div>
+
+            <div class="form-nav">
+              <span></span>
+              <button type="button" class="btn btn-primary" data-next>Next →</button>
+            </div>
+          </fieldset>
+
+          <!-- ---- STEP 2 ---- -->
+          <fieldset class="form-step" data-step="2">
+            <legend>Digital habits</legend>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="platform">Most used platform</label>
+                <select id="platform" name="Most_Used_Platform" required>
+                  <option value="" disabled selected>Select</option>
+                  <option>Instagram</option>
+                  <option>TikTok</option>
+                  <option>Facebook</option>
+                  <option>LinkedIn</option>
+                  <option>YouTube</option>
+                  <option>Twitter</option>
+                  <option>Snapchat</option>
+                  <option>WhatsApp</option>
+                  <option>LINE</option>
+                  <option>VKontakte</option>
+                  <option>KakaoTalk</option>
+                  <option>WeChat</option>
+                </select>
+                <span class="field-error" id="err-platform"></span>
+              </div>
+
+              <div class="field">
+                <label for="purpose">Purpose of use</label>
+                <select id="purpose" name="Purpose_Of_Use" required>
+                  <option value="" disabled selected>Select</option>
+                  <option>Entertainment</option>
+                  <option>Education</option>
+                  <option>Networking</option>
+                  <option>News</option>
+                </select>
+                <span class="field-error" id="err-purpose"></span>
+              </div>
+            </div>
+
+            <div class="field field--slider">
+              <label for="usageHours">Average daily usage hours <span class="slider-value" id="usageHoursValue">15.0</span></label>
+              <input type="range" id="usageHours" name="Avg_Daily_Usage_Hours" min="6" max="24" step="0.1" value="15">
+              <div class="slider-scale"><span>6h</span><span>24h</span></div>
+            </div>
+
+            <div class="field">
+              <label for="unlocks">Daily unlocks</label>
+              <input type="number" id="unlocks" name="Daily_Unlocks" min="1" placeholder="e.g. 50" required>
+              <span class="field-hint">How many times you unlock your phone per day</span>
+              <span class="field-error" id="err-unlocks"></span>
+            </div>
+
+            <div class="form-nav">
+              <button type="button" class="btn btn-ghost" data-back>← Back</button>
+              <button type="button" class="btn btn-primary" data-next>Next →</button>
+            </div>
+          </fieldset>
+
+          <!-- ---- STEP 3 ---- -->
+          <fieldset class="form-step" data-step="3">
+            <legend>Lifestyle &amp; stress</legend>
+
+            <div class="field field--slider">
+              <label for="studyHours">Study hours per day <span class="slider-value" id="studyHoursValue">5.0</span></label>
+              <input type="range" id="studyHours" name="Study_Hours" min="0" max="24" step="0.1" value="5">
+              <div class="slider-scale"><span>0h</span><span>24h</span></div>
+            </div>
+
+            <div class="field field--slider">
+              <label for="activityHours">Physical activity hours per day <span class="slider-value" id="activityHoursValue">1.0</span></label>
+              <input type="range" id="activityHours" name="Physical_Activity_Hours" min="0" max="24" step="0.1" value="1">
+              <div class="slider-scale"><span>0h</span><span>24h</span></div>
+            </div>
+
+            <div class="field field--slider">
+              <label for="sleepHours">Sleep hours per night <span class="slider-value" id="sleepHoursValue">7.0</span></label>
+              <input type="range" id="sleepHours" name="Sleep_Hours_Per_Night" min="0" max="24" step="0.1" value="7">
+              <div class="slider-scale"><span>0h</span><span>24h</span></div>
+            </div>
+
+            <div class="field">
+              <label>Stress level</label>
+              <div class="stress-grid" id="stressGrid" role="radiogroup" aria-label="Stress level">
+                <button type="button" class="stress-card" data-value="Low">
+                  <span class="stress-icon">🌿</span>
+                  <span class="stress-name">Low</span>
+                  <span class="stress-desc">Generally relaxed</span>
+                </button>
+                <button type="button" class="stress-card" data-value="Medium">
+                  <span class="stress-icon">🌤️</span>
+                  <span class="stress-name">Medium</span>
+                  <span class="stress-desc">Some regular pressure</span>
+                </button>
+                <button type="button" class="stress-card" data-value="High">
+                  <span class="stress-icon">⛈️</span>
+                  <span class="stress-name">High</span>
+                  <span class="stress-desc">Frequent stress</span>
+                </button>
+                <button type="button" class="stress-card" data-value="Very High">
+                  <span class="stress-icon">🌪️</span>
+                  <span class="stress-name">Very High</span>
+                  <span class="stress-desc">Significant stress</span>
+                </button>
+              </div>
+              <input type="hidden" id="stressLevel" name="Stress_Level" required>
+              <span class="field-error" id="err-stressLevel"></span>
+            </div>
+
+            <div class="form-nav">
+              <button type="button" class="btn btn-ghost" data-back>← Back</button>
+              <button type="submit" class="btn btn-primary" id="submitBtn">Analyze My Wellness</button>
+            </div>
+          </fieldset>
+
+        </form>
+
+        <!-- ---- LOADING ---- -->
+        <div class="loading-state" id="loadingState" hidden>
+          <div class="spinner" aria-hidden="true"></div>
+          <p>Analyzing your responses…</p>
+        </div>
+
+        <!-- ---- API ERROR ---- -->
+        <div class="api-error" id="apiError" hidden role="alert">
+          <span class="api-error-icon">⚠️</span>
+          <p id="apiErrorText"></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= RESULTS ================= -->
+  <section class="results" id="results" hidden>
+    <div class="section-inner section-inner--narrow">
+      <div class="results-card">
+
+        <h2>Your wellness score</h2>
+
+        <div class="score-gauge">
+          <svg viewBox="0 0 220 220" class="gauge-svg">
+            <circle cx="110" cy="110" r="94" class="gauge-track"/>
+            <circle cx="110" cy="110" r="94" class="gauge-fill" id="gaugeFill"/>
+          </svg>
+          <div class="gauge-center">
+            <span class="gauge-score" id="scoreValue">0</span>
+            <span class="gauge-max">/ 100</span>
+          </div>
+        </div>
+
+        <div class="score-interpretation" id="scoreInterpretation">
+          <span class="interpretation-badge" id="interpretationBadge">—</span>
+          <p id="interpretationText"></p>
+        </div>
+
+        <h3 class="results-subhead">Your inputs</h3>
+        <div class="detail-grid" id="detailGrid"></div>
+
+        <h3 class="results-subhead">Small steps that may help</h3>
+        <p class="suggestions-note">General wellness ideas, not medical treatment.</p>
+        <ul class="suggestions-list" id="suggestionsList"></ul>
+
+        <div class="results-actions">
+          <button class="btn btn-ghost" id="restartBtn">Take Assessment Again</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>MindTrack AI — a student project. Predictions are informational only and are not a medical diagnosis.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
