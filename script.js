@@ -244,7 +244,10 @@
         });
 
         if (response.status === 422) {
-          throw new Error("VALIDATION");
+          const errBody = await response.json().catch(() => null);
+          const err = new Error("VALIDATION");
+          err.detail = errBody;
+          throw err;
         }
         if (!response.ok) {
           throw new Error("SERVER_" + response.status);
@@ -294,12 +297,24 @@
         "Unable to connect to the prediction server. Please make sure your FastAPI backend is running at http://127.0.0.1:8000";
     } else if (err.message === "VALIDATION") {
       message = "Please check your answers and try again.";
+      const detail = err.detail && err.detail.detail;
+      if (Array.isArray(detail) && detail.length) {
+        const parts = detail.map((d) => {
+          const field = Array.isArray(d.loc) ? d.loc[d.loc.length - 1] : "field";
+          return `${field}: ${d.msg}`;
+        });
+        message += " (" + parts.join("; ") + ")";
+      } else if (typeof detail === "string") {
+        message += " (" + detail + ")";
+      }
     } else if (typeof err.message === "string" && err.message.startsWith("SERVER_")) {
       message = "The prediction server returned an error. Please try again in a moment.";
     }
 
     els.apiErrorText.textContent = message;
     els.apiError.hidden = false;
+    // eslint-disable-next-line no-console
+    console.error("Prediction request failed:", err, err.detail);
   }
   function hideApiError() {
     els.apiError.hidden = true;
@@ -307,7 +322,7 @@
 
   /* ---------------- Results ---------------- */
   function showResults(score, inputs) {
-    const clamped = Math.max(0, Math.min(100, Number(score)));
+    const clamped = Math.max(0, Math.min(10, Number(score)));
 
     els.assessmentSection.hidden = true;
     els.resultsSection.hidden = false;
@@ -324,7 +339,7 @@
     els.gaugeFill.style.strokeDashoffset = String(GAUGE_CIRCUMFERENCE);
 
     requestAnimationFrame(() => {
-      const offset = GAUGE_CIRCUMFERENCE * (1 - clamped / 100);
+      const offset = GAUGE_CIRCUMFERENCE * (1 - clamped / 10);
       els.gaugeFill.style.strokeDashoffset = String(offset);
 
       const duration = 900;
@@ -346,11 +361,11 @@
 
   function renderInterpretation(score) {
     let band, label, colorClass;
-    if (score < 30) {
+    if (score < 3) {
       band = "lower"; label = "Lower range"; colorClass = "band-lower";
-    } else if (score < 50) {
+    } else if (score < 5) {
       band = "moderate"; label = "Moderate range"; colorClass = "band-moderate";
-    } else if (score < 70) {
+    } else if (score < 7) {
       band = "elevated"; label = "Elevated range"; colorClass = "band-elevated";
     } else {
       band = "higher"; label = "Higher range"; colorClass = "band-higher";
