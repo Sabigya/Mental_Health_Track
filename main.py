@@ -17,7 +17,7 @@ class StudentInput(BaseModel):
     Academic_Level :Literal['Undergraduate', 'Graduate', 'High School']
     Most_Used_Platform : Literal['Instagram','TikTok','Facebook','LinkedIn','YouTube','Twitter','Snapchat','WhatsApp','LINE','VKontakte','KakaoTalk','WeChat']
     Purpose_Of_Use : Literal['Entertainment', 'Education', 'Networking', 'News']
-    Avg_Daily_Usage_Hours :float = Field(..., ge=6, le=24, description="Average daily usage hours (between 6 and 24)") 
+    Avg_Daily_Usage_Hours :float = Field(..., ge=0, le=24, description="Average daily usage hours (between 6 and 24)") 
     Daily_Unlocks : int = Field(..., ge=1,description="Number of daily unlocks (between 1 and 100)")
     Study_Hours : float = Field(..., ge=0, le=24, description="Study hours (between 0 and 24)")
     Physical_Activity_Hours: float = Field(..., ge=0, le=24, description="Physical activity hours (between 0 and 24)")  
