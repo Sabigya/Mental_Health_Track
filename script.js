@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  const API_URL = "http://127.0.0.1:8000/predict";
+  const API_URL = "https://mental-health-track-7.onrender.com/predict";
 
   // Must match the FastAPI Pydantic Literal exactly (order preserved).
   const COUNTRIES = [
